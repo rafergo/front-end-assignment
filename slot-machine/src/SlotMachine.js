@@ -1,0 +1,32 @@
+import { ReelSet } from "./ReelSet";
+
+export class SlotMachine 
+{
+    #reelSet;
+    #app;
+
+    constructor(app) 
+    {
+        this.#app = app;
+        this.#reelSet = new ReelSet();
+    }
+
+    spin() 
+    {
+        this.#reelSet.spin();
+        // TODO SlotView.spin();
+    }
+
+    _initReelSet()
+    {
+        const reelSymbols = [
+        ["hv2", "lv3", "lv3", "hv1", "hv1", "lv1", "hv1", "hv4", "lv1", "hv3", "hv2", "hv3", "lv4", "hv4", "lv1", "hv2", "lv4", "lv1", "lv3", "hv2"],
+        ["hv1", "lv2", "lv3", "lv2", "lv1", "lv1", "lv4", "lv1", "lv1", "hv4", "lv3", "hv2", "lv1", "lv3", "hv1", "lv1", "lv2", "lv4", "lv3", "lv2"],
+        ["lv1", "hv2", "lv3", "lv4", "hv3", "hv2", "lv2", "hv2", "hv2", "lv1", "hv3", "lv1", "hv1", "lv2", "hv3", "hv2", "hv4", "hv1", "lv2", "lv4"],
+        ["hv2", "lv2", "hv3", "lv2", "lv4", "lv4", "hv3", "lv2", "lv4", "hv1", "lv1", "hv1", "lv2", "hv3", "lv2", "lv3", "hv2", "lv1", "hv3", "lv2"],
+        ["lv3", "lv4", "hv2", "hv3", "hv4", "hv1", "hv3", "hv2", "hv2", "hv4", "hv4", "hv2", "lv2", "hv4", "hv1", "lv2", "hv1", "lv2", "hv4", "lv4"]
+        ];
+        
+        this.#reelSet = new ReelSet(reelSymbols);
+    }
+}
