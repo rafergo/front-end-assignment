@@ -3,17 +3,19 @@ import { SlotMachine as SlotMachine } from './SlotMachine.js';
 
 export class GameController 
 {
+    #app;
+    #slotMachine;
+    #preloader;
+
     constructor(app) 
     {
-        this.app = app;
-        this.slotMachine = null;
-        this.preloader = new PreloaderScreen(app);
+        this.#app = app;
+        this.#slotMachine = null;
+        this.#preloader = new PreloaderScreen(app);
     }
 
     async start() 
     {        
-        // TODO: Initialize SlotMachine and UI
-
         const assets = 
         [
             { name: 'spin', url: 'assets/spin_button.png' },
@@ -27,8 +29,8 @@ export class GameController
             { name: 'lv4',  url: 'assets/lv4_symbol.png' }
         ];
 
-        await this.preloader.load(assets);
-
-        console.log('[INFO] Assets loaded. Game starts here.');
+        await this.#preloader.load(assets);
+        this.#slotMachine = new SlotMachine(this.#app);
+        console.log('[INFO] Assets loaded.');
     }
 }

@@ -1,45 +1,58 @@
+import { ReelSetView } from "./ReelSetView";
+
 /** ReelSets contains the symbols in reels. IT can spin them and provide symbol IDs in a 2d array format.  */
 export class ReelSet 
 {
     symbols;
 
     #bands;
-    #length;
-    #height;
+    #cols;
+    #rows;
+    #view;
 
-    constructor(bands = [], height = 3) 
-    {
+    constructor(app, bands = [], rows = 3) 
+    {        
         this.#bands = bands;
-        this.#length = bands.length;
-        this.#height = height;
+        this.#cols = bands.length;
+        this.#rows = rows;
+
+        this.#view = new ReelSetView(app, this.#cols, this.#rows);
 
         this.symbols = [];
-        for(let x = 0; x < this.#length; x++)
+        for(let x = 0; x < this.#cols; x++)
         {
             this.symbols.push([]);
         }
 
         this.#updateSymbols();
+        this.#view.update(this.symbols);
     }
 
     /** Spin all bands.  */
     spin() 
     {
-        for(let i = 0; i < this.#length; i++)
+        for(let i = 0; i < this.#cols; i++)
         {
             this.#bands[i].spin();
         }
+        
         this.#updateSymbols();
+        this.#view.update(this.symbols);
     }
 
-    /** Returns the SymbolID at index-relative-to-position. 0 returns symbolIDs[position].  */
+    resizeView()
+    {
+        this.#view.resize();    
+    }
+
+    /** Re turns the SymbolID at index-relative-to-position. 0 returns symbolIDs[position].  */
     #updateSymbols()
     {
-        for(let x = 0; x < this.#length; x++)
+        for(let x = 0; x < this.#cols; x++)
         {
-            for(let y = 0; y < this.#height; y++)
+            for(let y = 0; y < this.#rows; y++)
             {
-                symbols[x][y] = this.#bands[x].getValue(y);
+                this.symbols[x][y] = this.#bands[x].getValue(y);
             }
         }
     }

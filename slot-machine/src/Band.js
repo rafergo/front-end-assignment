@@ -22,6 +22,6 @@ export class Band
     getValue(index)
     {
         const relativeIndex = (this.#position + index) % this.#size;
-        return band[relativeIndex];
+        return this.#symbolIDs[relativeIndex];
     }
 }

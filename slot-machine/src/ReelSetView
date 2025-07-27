@@ -1,0 +1,90 @@
+import { Container, Sprite, Assets } from 'pixi.js';
+
+export class ReelSetView 
+{
+    #container;
+    #cols;
+    #rows;
+    #spriteSize;
+    #grid;
+    #app;
+
+    constructor(app, cols, rows) 
+    {
+        this.#app = app;
+        this.#cols = cols;
+        this.#rows = rows;
+        this.#spriteSize = 0;
+        this.#grid = []; 
+
+        this.#initGrid();
+        this.resize();    
+    }
+
+    /**
+     * @param {string[][]} symbolMatrix - 2D array [col][row] of symbolIDs like 'hv1' to update the symbol sprites.
+     */
+    update(symbolMatrix) 
+    {
+        for (let x = 0; x < this.#cols; x++) 
+        {
+            for (let y = 0; y < this.#rows; y++) 
+            {
+                const id = symbolMatrix[x][y];
+                const texture = Assets.get(id);
+
+                if (!texture) 
+                {
+                    console.warn(`[WARN] Texture not found for symbol ID: ${id}`);
+                    continue;
+                }
+
+                this.#grid[x][y].texture = texture;
+            }
+        }
+    }
+
+    #initGrid() 
+    {
+        this.#container = new Container();
+        this.#app.stage.addChild(this.#container);
+        
+        for (let x = 0; x < this.#cols; x++) 
+        {
+            const columnSprites = [];
+
+            for (let y = 0; y < this.#rows; y++) 
+            {
+                const sprite = new Sprite(); 
+                this.#container.addChild(sprite);
+                columnSprites.push(sprite);
+            }
+
+            this.#grid.push(columnSprites);
+        }
+    }
+
+    resize()
+    {
+        this.#resizeGrid();
+    }
+
+    #resizeGrid()
+    {
+        const { width, height } = this.#app.renderer.screen;
+        
+        this.#spriteSize = Math.min(width/this.#cols, height/this.#rows);
+
+        for (let x = 0; x < this.#cols; x++) 
+        {
+            for (let y = 0; y < this.#rows; y++) 
+            {
+                let sprite = this.#grid[x][y];
+                sprite.width = this.#spriteSize;
+                sprite.height = this.#spriteSize;
+                sprite.x = x * this.#spriteSize;
+                sprite.y = y * this.#spriteSize;
+            }
+        }
+    }
+}
