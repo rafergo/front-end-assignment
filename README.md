@@ -13,6 +13,13 @@ This project is a simple 5x3 slot machine simulation built using :
 - 3. **Open in your browser**
     Visit: http://localhost:5173/
 
+## Compatibilities
+Tested and works on the following browsers:
+- Google Chrome, 
+- Opera,
+- Microsoft Edge,
+- Firefox. 
+
 ## Limitations
 While the project was built with scalability in mind,
 it assumes the followings:
@@ -22,7 +29,6 @@ it assumes the followings:
     There are 5 reels, 
     Reels have 3 symbols,
     Bands have 3+ symbols.
-
 
 ## Features
 -  Preloader screen with percentage loading text
