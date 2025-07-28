@@ -67,7 +67,7 @@ export class ReelSetView
     /**
     Resizes the view to utilize up to screenRatio of the screen height. This is updated dynamically.
     */
-    resize(screenRatio = 0.8)
+    resize(screenRatio = 0.7)
     {
         this.#resizeGrid(screenRatio);
     }
@@ -90,5 +90,9 @@ export class ReelSetView
                 sprite.y = y * this.#spriteSize;
             }
         }
+
+        // Horizontal centering
+        const gridWidth = this.#cols * this.#spriteSize;
+        this.#container.x = (width - gridWidth) / 2;
     }
 }

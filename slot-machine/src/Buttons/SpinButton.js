@@ -12,7 +12,7 @@ export class SpinButton
         
         const textureKey = 'spin';
         this.#sprite = new Sprite(Assets.get(textureKey));
-        this.#sprite.anchor.set(0, 1);
+        this.#sprite.anchor.set(0.5, 1);
         this.#sprite.eventMode = 'static';
         this.#sprite.cursor = 'pointer';
         this.#onClick = onClick;
@@ -32,13 +32,13 @@ export class SpinButton
         this.#sprite.alpha = 0.5;
     }
 
-    resizeView(modifier = 0.2)
+    resizeView(modifier = 0.15)
     {
         const { width, height } = this.#app.renderer.screen;
         const size = Math.min(width, height) * modifier;
         this.#setSize(size);
         //positioned bototm-left.        
-        const position = {x: 0, y: height};
+        const position = {x: width/2, y: height-size};
         this.#setPosition(position.x, position.y);
     }
 
