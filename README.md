@@ -4,6 +4,15 @@ This project is a simple 5x3 slot machine simulation built using :
 - **Vite**,
 - **Pixi.js**. 
 
+## Setup
+- 1. **Install**  
+    Node.js must be installed.  
+    in "slot-machine" folder, run the bash command: npm install
+- 2. **Start the dev server**
+    in "slot-machine" folder, run the bash command: npm run dev
+- 3. **Open in your browser**
+    Visit: http://localhost:5173/
+
 ## Limitations
 While the project was built with scalability in mind,
 it assumes the followings:
