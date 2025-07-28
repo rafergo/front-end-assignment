@@ -1,4 +1,4 @@
-import { Container } from 'pixi.js';
+import { SpinButton } from "./SpinButton";
 import { ReelSet } from "./ReelSet";
 import { Band } from "./Band";
 
@@ -7,14 +7,17 @@ export class SlotMachine
     #reelSet;
     #onResize;
     #app;
+    #spinButton;
+    #onSpin;
 
     constructor(app) 
     {
         this.#app = app;
         this.#initReelSet();
-        
-        this.#onResize = () => this.resizeViews(); 
-        this.resizeViews();
+        this.#initSpinButton();
+
+        this.#onResize = () => this.#resizeViews(); 
+        this.#resizeViews();
         window.addEventListener('resize', this.#onResize);
     }
 
@@ -37,8 +40,16 @@ export class SlotMachine
         this.#reelSet = new ReelSet(this.#app, bands);
     }
 
-    resizeViews()
+    #initSpinButton()
+    {
+        this.#onSpin = () => this.spin();
+        this.#spinButton = new SpinButton(this.#onSpin, this.#app);
+    }
+
+
+    #resizeViews()
     {
         this.#reelSet.resizeView();
+        this.#spinButton.resizeView();
     }
 }

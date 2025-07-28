@@ -64,16 +64,20 @@ export class ReelSetView
         }
     }
 
-    resize()
+    /**
+    Resizes the view to utilize up to screenRatio of the screen height. This is updated dynamically.
+    */
+    resize(screenRatio = 0.8)
     {
-        this.#resizeGrid();
+        this.#resizeGrid(screenRatio);
     }
 
-    #resizeGrid()
+    #resizeGrid(screenRatio)
     {
         const { width, height } = this.#app.renderer.screen;
-        
-        this.#spriteSize = Math.min(width/this.#cols, height/this.#rows);
+        let maxWidth = width / this.#cols;
+        let maxHeight = height * screenRatio / this.#rows;
+        this.#spriteSize = Math.min(maxWidth, maxHeight);
 
         for (let x = 0; x < this.#cols; x++) 
         {
