@@ -3,6 +3,10 @@ import { ReelSet } from "./Reels/ReelSet.js";
 import { Band } from "./Reels/Band.js";
 import { WinCalculator } from "./Wins/WinCalculator.js";
 
+/**
+ * The SlotMachine lets you play games by pressing the Spin Button. 
+ * It then Spins the reels and calculate wins.
+ */
 export class SlotMachine 
 {
     #app;
@@ -12,6 +16,10 @@ export class SlotMachine
     #onSpin;
     #onResize;
 
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     */
     constructor(app) 
     {
         this.#app = app;
@@ -25,12 +33,14 @@ export class SlotMachine
         window.addEventListener('resize', this.#onResize);
     }
 
+    /**
+     * Spins the reels and calculate wins.
+     */
     spin() 
     {
         this.#reelSet.spin();
-
         const symbols = this.#reelSet.symbols;
-        const winData = this.#winCalculator.evaluate(symbols);
+        this.#winCalculator.evaluate(symbols);
     }
 
     #initReelSet()

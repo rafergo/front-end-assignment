@@ -7,6 +7,10 @@ export class WinView
     #text;
     #style;
 
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     */
     constructor(app) 
     {
         this.#app = app;
@@ -41,10 +45,15 @@ export class WinView
         this.resize();
     }
 
-    resize(modifier = 0.15) 
+
+    /**
+     * Resize this view content and maintain screenRatio.
+     * @param {*} screenRatio is the dedicated screen-height ratio for this view.
+     */
+    resize(screenRatio = 0.15) 
     {
         const { width, height } = this.#app.renderer.screen;
-        const textHeight = height * modifier;
+        const textHeight = height * screenRatio;
 
         // Correct positioning
         this.#text.x = width / 2;

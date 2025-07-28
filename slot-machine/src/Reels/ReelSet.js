@@ -10,6 +10,12 @@ export class ReelSet
     #rows;
     #view;
 
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     * @param {Array<Band>} bands 
+     * @param {number} rows 
+     */
     constructor(app, bands = [], rows = 3) 
     {        
         this.#bands = bands;
@@ -40,6 +46,10 @@ export class ReelSet
         this.#view.update(this.symbols);
     }
 
+    /**
+     * ResizeView is called every-time the screen sizes. 
+     * @param {*} screenRatio is the dedicated screen-height ratio for this view.
+     */
     resizeView()
     {
         this.#view.resize();    

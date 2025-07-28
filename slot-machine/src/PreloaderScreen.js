@@ -1,11 +1,19 @@
 import { Assets, Text } from 'pixi.js';
 
+/**
+ * PreloaderScreen loads assets in memory. While loading, 
+ * While loading, the screen displays the load progressiong.
+ */
 export class PreloaderScreen 
 {
     #app;
     #loadingText;
     #onResize;
 
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     */
     constructor(app) 
     {
         this.#app = app;
@@ -29,6 +37,10 @@ export class PreloaderScreen
         window.addEventListener('resize', this.#onResize);
     }
 
+    /**
+     * Loads assets in memory async.
+     * @param {Array<{key:string,url:string}>} assets 
+     */
     async load(assets) 
     {
         const total = assets.length;

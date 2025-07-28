@@ -1,11 +1,19 @@
 import { Sprite, Assets } from 'pixi.js';
 
+/**
+ * The SpinButton is a button whith a onclick callback to SlotMachine.Spin()
+ */
 export class SpinButton 
 {
     #sprite;
     #app;
     #onClick;
 
+    /**
+     * 
+     * @param {callback} onClick 
+     * @param {PIXI.Application} app 
+     */
     constructor(onClick, app) 
     {
         this.#app = app;
@@ -20,24 +28,16 @@ export class SpinButton
         this.#app.stage.addChild(this.#sprite);
     }
 
-    enable() 
-    {
-        this.#sprite.eventMode = 'static';
-        this.#sprite.alpha = 1;
-    }
-
-    disable() 
-    {
-        this.#sprite.eventMode = 'none';
-        this.#sprite.alpha = 0.5;
-    }
-
-    resizeView(modifier = 0.15)
+    /**
+     * ResizeView is called every-time the screen sizes. 
+     * @param {*} screenRatio is the dedicated screen-height ratio for this view.
+     */
+    resizeView(screenRatio = 0.15)
     {
         const { width, height } = this.#app.renderer.screen;
-        const size = Math.min(width, height) * modifier;
+        const size = Math.min(width, height) * screenRatio;
         this.#setSize(size);
-        //positioned bototm-left.        
+        //positioned bototm-center.        
         const position = {x: width/2, y: height-size};
         this.#setPosition(position.x, position.y);
     }

@@ -1,5 +1,8 @@
 import { Container, Sprite, Assets } from 'pixi.js';
 
+/**
+ * ReelSetView renders and updates the Reels Grid.
+ */
 export class ReelSetView 
 {
     #container;
@@ -9,6 +12,12 @@ export class ReelSetView
     #grid;
     #app;
 
+    /**
+     * 
+     * @param {PixiMixins.Application} app 
+     * @param {Number} cols 
+     * @param {Number} rows 
+     */
     constructor(app, cols, rows) 
     {
         this.#app = app;
@@ -44,6 +53,15 @@ export class ReelSetView
         }
     }
 
+    /**
+     * Resize this view content and maintain screenRatio.
+     * @param {*} screenRatio is the dedicated screen-height ratio for this view.
+     */
+    resize(screenRatio = 0.7)
+    {
+        this.#resizeGrid(screenRatio);
+    }
+
     #initGrid() 
     {
         this.#container = new Container();
@@ -62,14 +80,6 @@ export class ReelSetView
 
             this.#grid.push(columnSprites);
         }
-    }
-
-    /**
-    Resizes the view to utilize up to screenRatio of the screen height. This is updated dynamically.
-    */
-    resize(screenRatio = 0.7)
-    {
-        this.#resizeGrid(screenRatio);
     }
 
     #resizeGrid(screenRatio)

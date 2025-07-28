@@ -5,6 +5,10 @@ export class Band
     #position;
     #size;
 
+    /**
+     * 
+     * @param {Array<string>} symbolIDs 
+     */
     constructor(symbolIDs = []) 
     {
         this.#symbolIDs = symbolIDs;
@@ -18,7 +22,11 @@ export class Band
         this.#position = Math.floor(Math.random() * this.#symbolIDs.length);
     }
 
-    /** Returns the SymbolID at index-relative-to-position. 0 returns symbolIDs[position].  */
+    /**
+    * Returns the SymbolID at index-relative-to-position. 0 returns symbolIDs[position].
+     * @param {number} index 
+     * @returns {string} symbolID
+     */
     getValue(index)
     {
         const relativeIndex = (this.#position + index) % this.#size;

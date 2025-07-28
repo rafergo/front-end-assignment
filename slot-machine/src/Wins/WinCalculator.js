@@ -2,6 +2,9 @@ import { Payline } from "./PayLine.js";
 import { PayTable } from "./PayTable.js";
 import { WinView } from "./WinView.js";
 
+/**
+ * Calculates Wins using a PayTable and PayLines.
+ */
 export class WinCalculator 
 {
     /**
@@ -33,7 +36,11 @@ export class WinCalculator
         new Payline([2, 1, 0, 1, 2])
     ];
 
-    
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     * @param {Number} cols = Reels Count.
+     */
     constructor(app, cols = 5) 
     {
         this.#cols = cols;
@@ -45,6 +52,7 @@ export class WinCalculator
     }
 
     /**
+     * Evaluates each PayLine and calculate wins with the PayTable.
      * @param {string[][]} symbolMatrix 
      */
     evaluate(symbolMatrix) 
@@ -70,6 +78,10 @@ export class WinCalculator
         this.#winView.show(winData);
     }
 
+    /**
+     * ResizeView is called every-time the screen sizes. 
+     * @param {*} screenRatio is the dedicated screen-height ratio for this view.
+     */
     resizeView()
     {
         this.#winView.resize();

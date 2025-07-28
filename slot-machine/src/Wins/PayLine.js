@@ -5,6 +5,10 @@ export class Payline
 {
     #pattern;
 
+    /**
+     * 
+     * @param {Array<number>} pattern is the index array that represents hte value needed on each reel for a winning line.
+     */
     constructor(pattern) 
     {
         this.#pattern = pattern;

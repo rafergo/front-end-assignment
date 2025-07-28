@@ -1,12 +1,19 @@
 import { PreloaderScreen as PreloaderScreen } from './PreloaderScreen.js';
 import { SlotMachine as SlotMachine } from './SlotMachine.js';
 
+/**
+ * The GameController setups the preloader and the slotmachine to get the game started.
+ */
 export class GameController 
 {
     #app;
     #slotMachine;
     #preloader;
 
+    /**
+     * 
+     * @param {PIXI.Application} app 
+     */
     constructor(app) 
     {
         this.#app = app;
@@ -14,6 +21,9 @@ export class GameController
         this.#preloader = new PreloaderScreen(app);
     }
 
+    /**
+     * Waits until all assets are loaded to setup the SlotMachine.
+     */
     async start() 
     {        
         const assets = 
@@ -31,6 +41,5 @@ export class GameController
 
         await this.#preloader.load(assets);
         this.#slotMachine = new SlotMachine(this.#app);
-        console.log('[INFO] Assets loaded.');
     }
 }
